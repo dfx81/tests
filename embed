@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <title>EMBED</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: sans-serif;
+      }
+      
+      html, body {
+        margin: 0px;
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script defer>
+      window.onload = () => {
+        let query = new URLSearchParams(location.search);
+
+        if (query.get("url")) {
+          document.body.innerHTML = "";
+          let iframe = document.createElement("iframe");
+          iframe.src = query.get("url");
+          document.body.appendChild(iframe);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <span>No URL to embed.</span>
+  </body>
+</html>
