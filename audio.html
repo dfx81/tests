@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <title>Audio Test</title>
+    <script defer>
+      let bgm;
+
+      window.onload = () => {
+        bgm = document.querySelector("#bgm");
+        play();
+      };
+
+      let play = () => {
+        bgm.play();
+      };
+
+      let pause = () => {
+        bgm.pause();
+      };
+    </script>
+  </head>
+  <body>
+    <h1>HTML5 Audio</h1>
+    <p>Audio can be autoplayed, but in modern browsers requires it to be muted or requires user interaction.</p>
+    <p>If seamless looping is needed, Web Audio API need to be used instead of HTML5's audio tag</p>
+    <p>This demo contains a hidden audio tag that plays a bgm song, and another audio tag that can be manually controlled by the user.</p>
+    <audio src="audio/CassetteTapeDream.mp3" controls></audio>
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center;">
+      <button style="flex: 1;" onclick="play()">PLAY BGM</button>
+      <button style="flex: 1;" onclick="pause()">PAUSE BGM</button>
+    </div>
+    <p>Songs by Sharou (DOVA-SYNDROME)</p>
+    <audio style="display: none;" id="bgm" src="audio/HoneyLemon.mp3" loop></audio>
+  </body>
+</html>
