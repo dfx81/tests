@@ -32,8 +32,7 @@
             navigator.serviceWorker.register("firebase-messaging-sw.js")
                 .then((registration) => {
                     console.log("Service Worker registered with scope:", registration.scope);
-                    messaging.useServiceWorker(registration);
-                    getToken(messaging, { vapidKey: "BM2na3cWWz8twdIm-TxRH7JXQ1XLuhgvpB9zc3Cz_UGrUVIxQh1zFOH87ov_XQlG5z21fcUU7ITnGFABXdp-jPA" }).then(
+                    getToken(messaging, { vapidKey: "BM2na3cWWz8twdIm-TxRH7JXQ1XLuhgvpB9zc3Cz_UGrUVIxQh1zFOH87ov_XQlG5z21fcUU7ITnGFABXdp-jPA", serviceWorkerRegistration: registration }).then(
                         currentToken => {
                             if (currentToken) {
                                 console.log('current token for client: ', currentToken);
