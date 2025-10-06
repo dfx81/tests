@@ -27,19 +27,27 @@
         const analytics = getAnalytics(app);
         const messaging = getMessaging(app);
 
-        getToken(messaging, { vapidKey: "BM2na3cWWz8twdIm-TxRH7JXQ1XLuhgvpB9zc3Cz_UGrUVIxQh1zFOH87ov_XQlG5z21fcUU7ITnGFABXdp-jPA" }).then(
-            currentToken => {
-                if (currentToken) {
-                    console.log('current token for client: ', currentToken);
-                    document.write(currentToken);
-                } else {
-                    requestNotiPerms();
-                }
-            }).catch(err => {
-                console.log('An error occurred while retrieving token. ', err);
-                alert(err);
-            }
-            );
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("firebase-messaging-sw.js")
+                .then((registration) => {
+                    console.log("Service Worker registered with scope:", registration.scope);
+                    getToken(messaging, { vapidKey: "BM2na3cWWz8twdIm-TxRH7JXQ1XLuhgvpB9zc3Cz_UGrUVIxQh1zFOH87ov_XQlG5z21fcUU7ITnGFABXdp-jPA" }).then(
+                        currentToken => {
+                            if (currentToken) {
+                                console.log('current token for client: ', currentToken);
+                                document.write(currentToken);
+                            } else {
+                                requestNotiPerms();
+                            }
+                        }).catch(err => {
+                            console.log('An error occurred while retrieving token. ', err);
+                            alert(err);
+                        }
+                        );
+                }).catch((err) => {
+                    console.log("Service Worker registration failed:", err);
+                });
+        }
 
         let requestNotiPerms = () => {
             console.log('Requesting permission...');
@@ -52,7 +60,9 @@
         }
     </script>
 </head>
+
 <body>
     <button onclick="requestNotiPerms()">GET PERMS</button>
 </body>
+
 </html>
